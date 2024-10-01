@@ -15,7 +15,7 @@ import{
 
 export const TOKEN_ICO_Context = React.createContext();
 
-export const TOKEN_ICO_Provider = ({childer}) => {
+export const TOKEN_ICO_Provider = ({children}) => {
     const DAPP_NAME = "TOKEN ICO DAPP";
     const currency = "ETH";
     const network = "Holesky";
@@ -277,7 +277,7 @@ export const TOKEN_ICO_Provider = ({childer}) => {
         currency,
 
         }}>
-            {childer}
+            {children}
         </TOKEN_ICO_Context.Provider>
     )
 }

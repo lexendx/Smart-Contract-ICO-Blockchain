@@ -1,6 +1,13 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 
-const Header = () => {
+const Header = ( {account, CONNECT_WALLET,
+  setAccount,
+  setLoader,
+  setOwnerModel,
+  shortenAddress,
+  detail,
+  currency,
+  ownerModel}) => {
   return <div>Header</div>;
 };
 

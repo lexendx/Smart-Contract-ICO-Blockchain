@@ -191,13 +191,15 @@ console.log(error);
 
 }
   };
-  export const ERC20 = async ()=>{
+  export const ERC20 = async (ADDRESS
+  )=>{
     try{
     const web3modal = new Web3Model();
     const connection = await web3modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
     const network = await provider.getNetwork();
     const singer = await provider.getSinger();
+    const Contract = fetchContract(CONTRACT_ADDRESS, CONTRACT_ABI, singer);
     
    const userAddress = singer.getAddress();
    const balance = await Contract.balanceOf(userAddress);
