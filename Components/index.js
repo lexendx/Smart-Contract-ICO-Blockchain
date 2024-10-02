@@ -13,18 +13,38 @@ import Team from "./Team";
 import Token from "./Token";
 import TokenInfo from "./TokenInfo";
 import Roadmap from "./Roadmap";
-//model 
+
+//model
 import Popup from "./Popup";
 import TransferToken from "./TransferToken";
-import Owner from "./Owner";
 import TransferCurrency from "./TransferCurrency";
+import Owner from "./Owner";
 import Donate from "./Donate";
 import UpdatePrice from "./UpdatePrice";
 import UpdateAddress from "./UpdateAddress";
 
 
 export {
-Footer, Header, About,Brand,Contact, Faq, Features, Hero, Loader, Progress, SideBar,Team,Token, TokenInfo,Roadmap,Popup,
-TransferToken,TransferCurrency,Owner,Donate,UpdateAddress,UpdatePrice
-
-};
+    Footer, 
+    Header,
+     About,
+      Brand,
+       Contact,
+        Faq, 
+        Features, 
+        Hero,
+    Loader,
+     Progress,
+      SideBar,
+       Team,
+        Token,
+         TokenInfo,
+          Roadmap,
+    Popup,
+     TransferToken,
+      Owner,
+       TransferCurrency,
+        Donate,
+         UpdateAddress,
+          UpdatePrice,
+}

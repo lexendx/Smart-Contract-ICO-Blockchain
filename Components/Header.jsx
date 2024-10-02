@@ -1,133 +1,158 @@
 import React, { useState, useEffect } from "react";
-import { shortenAddress } from "../Utils";
 
 const Header = ({
   account,
   CONNECT_WALLET,
   setAccount,
   setLoader,
-  setOwnerModel,
-  detail,
+  setOwnerModal,
+  shortenAddress,
+  details,
   currency,
-  ownerModel
+  ownerModal,
 }) => {
   const [isMetaMaskInstalled, setIsMetaMaskInstalled] = useState(false);
 
   useEffect(() => {
     if (typeof window.ethereum !== "undefined") {
       setIsMetaMaskInstalled(true);
+
       window.ethereum.on("accountsChanged", handleAccountsChanged);
     }
-
-    // Cleanup the event listener on component unmount
     return () => {
       if (typeof window.ethereum !== "undefined") {
-        window.ethereum.removeListener("accountsChanged", handleAccountsChanged);
+        window.ethereum.removeListener(
+          "accountsChanged",
+          handleAccountsChanged
+        );
       }
     };
   }, []);
 
   const handleAccountsChanged = (accounts) => {
-    if (accounts.length > 0) {
-      setAccount(accounts[0]);
-    } else {
-      setAccount(null);
-    }
+    setAccount(accounts[0]);
   };
-
-  const connectMetaMask = async () => {
+  const connectMetamask = async () => {
     if (typeof window.ethereum !== "undefined") {
       try {
         const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
+          mehtod: "eth_requestAccounts",
         });
         setAccount(accounts[0]);
       } catch (error) {
-        console.error("Error connecting to MetaMask:", error);
+        console.log("error message in connectmetamask Header")
+        console.log(error.message);
       }
     } else {
-      console.log("MetaMask is not installed");
-      // Optionally, you can prompt the user to install MetaMask here
+      console.log("Metamask is not installed");
     }
   };
 
-  return (
-    <header className="site-header header--transparentico-header">
-      <div className="header_main-wrap">
-        <div className="container mxw_1640">
-          <div className="header__main ul_li_between">
-            <div className="header__left ul_li">
-              <a href="/">
-                <img src="assets/img/logo/logo.svg" alt="Logo" />
-              </a>
-            </div>
+  return <header className="site-header header--transparent ico-header">
+
+    <div className="header_main-wrap">
+    <div className="container mxw_1640 ">
+      
+      <div className="header__main ul_li_between">
+        <div className="header_left ul_li">
+          <div className="header__logo">
+            <a href="/">
+            <img src="assets/img/logo/logo.svg" alt="help" />
+            
+            </a>
           </div>
-          <div className="main-menu__wrap ul_li navbar navbar-expand-xl">
-            <nav className="main-menu collapse navbar-collapse">
-              <ul>
-                <li className="active has-mega-menu">
-                  <a href="/">Home</a>
-                </li>
-                <li className="scrollspy-btn">
-                  <a href="#about">About</a>
-                </li>
-                <li className="active has-mega-menu">
-                  <a href="#roadmap">Roadmap</a>
-                </li>
-                <li className="active has-mega-menu">
-                  <a href="#team">Team</a>
-                </li>
-                <li className="active has-mega-menu">
-                  <a href="#faq">Faq</a>
-                </li>
-                <li className="active has-mega-menu">
-                  <a href="#contact">Contact</a>
-                </li>
-                <li className="active has-mega-menu">
-                  <a
-                    style={{ cursor: "pointer" }}
-                    onClick={() => setOwnerModel(!ownerModel)}
-                  >
-                    Tools
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div className="header__action ul_li">
-            <div className="d-xl-none">
-              <a className="header__bar hamburger_menu" href="#">
-                <div className="header__bar-icon">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
-              </a>
-            </div>
-            {account ? (
-              <div className="header__account">
-                <a
-                  onClick={() =>
-                    navigator.clipboard.writeText(detail?.address)
-                  }
-                >
-                  {shortenAddress(detail?.address)}:{" "}
-                  {detail?.maticBal?.slice(0, 6)} {currency}
-                </a>
-              </div>
-            ) : (
-              <div className="header__account">
-                <a onClick={connectMetaMask}>
-                  Connect Wallet
-                </a>
-              </div>
-            )}
-          </div>
+
         </div>
+        <div className="main-menu__wrap ul_li navbar navbar-expand-xl">
+          <nav className="main-menu collapse navbar-collapse">
+            <ul>
+              <li >
+                <a className="active has-mega-menu"
+                 href="/">Home</a>
+              </li>
+              <li >
+                    <a className="scrollspy-btn"
+                     href="#about">About</a>
+                  </li>
+                  <li >
+                    <a className="scrollspy-btn"
+                     href="#roadmap">Roadmap</a>
+                  </li>
+                  <li >
+                    <a className="scrollspy-btn"
+                     href="#team">Team</a>
+                  </li>
+                  <li >
+                    <a className="scrollspy-btn"
+                    href="#faq">Faq</a>
+                  </li>
+                  <li >
+                    <a className="scrollspy-btn"
+                     href="#contact">Contact</a>
+                  </li>
+
+                  <li >
+                    <a className="scrollspy-btn"
+                      style={{
+                        cursor: "pointer",
+                      }}
+                      onClick={() =>
+                        ownerModal ? setOwnerModal(false) : setOwnerModal(true)
+                      }
+                    >
+                      Tools
+                    </a>
+                  </li>
+            </ul>
+
+
+
+          </nav>
+        </div>
+
+
+        <div className="header__action ul_li">
+          <div  className="d-xl-none">
+            <a className="header__bar hamburger_menu ">
+              <div className="header__bar-icon">
+                <span/>
+                <span/>
+                <span/>
+                <span/>
+                
+                
+                </div> 
+            </a>
+          </div>
+
+          {account ? (
+            <div className="header__account">
+            <a
+              onClick={() =>
+                navigator.clipboard.writeText(details?.address)
+              }
+            >
+              {shortenAddress(details?.address)}:{""}
+              {details?.maticBal?.slice(0, 6)}
+              {currency}
+            </a>
+          </div>
+          ):(
+            <div className="header__account">
+              <a onClick={() => connectMetamask()}>Connect Wallet</a>
+            </div>
+          )}
+        </div>
+
       </div>
-    </header>
-  );
+      </div>
+
+
+    </div>
+
+
+
+  </header>;
 };
 
 export default Header;
