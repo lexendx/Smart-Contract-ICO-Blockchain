@@ -15,7 +15,7 @@ interface ERC20 {
 contract TokenICO {
     address public owner;
     address public tokenAddress;
-    uint256 public tokenSalePrice;
+    uint256 public tokenSalePrice;  // Sale price of tokens in Wei
     uint256 public soldTokens;
 
     modifier onlyOwner() {
@@ -23,8 +23,9 @@ contract TokenICO {
         _;
     }
 
-    constructor() {
+    constructor(uint256 _initialTokenSalePrice) {
         owner = msg.sender;
+        tokenSalePrice = _initialTokenSalePrice;  // Set the initial token sale price
     }
 
     function updateToken(address _tokenAddress) public onlyOwner {
@@ -42,15 +43,21 @@ contract TokenICO {
     }
 
     function buyToken(uint256 _tokenAmount) public payable {
-        require(msg.value == multiply(_tokenAmount, tokenSalePrice), "Insufficient Ether provided for the token purchase");
+        uint256 requiredEther = multiply(_tokenAmount, tokenSalePrice);
+        require(msg.value == requiredEther, "Insufficient Ether provided for the token purchase");
+
         ERC20 token = ERC20(tokenAddress);
-        require(_tokenAmount <= token.balanceOf(address(this)), "Not enough token left for sale");
+        require(_tokenAmount <= token.balanceOf(address(this)), "Not enough tokens left for sale");
+
+        // Transfer tokens to buyer
         require(token.transfer(msg.sender, _tokenAmount * 1e18), "Token transfer failed");
+
+        // Transfer Ether to owner
         payable(owner).transfer(msg.value);
         soldTokens += _tokenAmount;
     }
 
-    function getTokenDetails(address _tokenAddress, uint256 _tokenPrice) public view returns (
+    function getTokenDetails() public view returns (
         string memory name, 
         string memory symbol, 
         uint256 balance, 
@@ -58,14 +65,15 @@ contract TokenICO {
         uint256 tokenPriceReturn, 
         address tokenAddr
     ) {
-        ERC20 token = ERC20(_tokenAddress);
+        require(tokenAddress != address(0), "Token address is not set");
+        ERC20 token = ERC20(tokenAddress);
         return (
             token.name(),
             token.symbol(),
             token.balanceOf(address(this)),
             token.totalSupply(),
-            _tokenPrice,
-            _tokenAddress
+            tokenSalePrice,
+            tokenAddress
         );
     }
 
@@ -82,6 +90,7 @@ contract TokenICO {
     }
 
     function withdrawAllTokens() public onlyOwner {
+        require(tokenAddress != address(0), "Token address is not set");
         ERC20 token = ERC20(tokenAddress);
         uint256 balance = token.balanceOf(address(this));
         require(balance > 0, "No tokens to withdraw");

@@ -3,18 +3,15 @@ import {
   Footer,
   Header,
   About,
-  Brand,
-  Contact,
-  Faq,
   Features,
   Hero,
   Loader, // Ensure this is correctly imported
-  Progress,
   SideBar,
   Team,
   Token,
   TokenInfo,
-  Roadmap,
+  Faq,
+  Contact,
   Popup,
   TransferToken,
   TransferCurrency,
@@ -31,7 +28,7 @@ const Index = () => {
     setAccount,
     setLoader,
     currency,
-    addtokenToMetaMask, // Note the lowercase 't'
+    addtokenToMetaMask,
     TOKEN_ICO,
     BUY_TOKEN,
     TRANSFER_ETHER,
@@ -43,14 +40,15 @@ const Index = () => {
     CONNECT_WALLET,
     ERC20,
     CHECK_ACCOUNT_BALANCE,
-    loader, // Destructure loader
+    loader,
     account,
-  } = useContext(TOKEN_ICO_Context); // Only destructure what's provided
+  } = useContext(TOKEN_ICO_Context);
 
+  // Modal states
   const [ownerModel, setOwnerModel] = useState(false);
   const [buyModel, setBuyModel] = useState(false);
   const [transferModal, setTransferModal] = useState(false);
-  const [transferCurrencyModal, setTransferCurrencyModal] = useState(false); // Renamed to avoid confusion
+  const [transferCurrencyModal, setTransferCurrencyModal] = useState(false);
   const [openDonate, setOpenDonate] = useState(false);
   const [openUpdatePrice, setOpenUpdatePrice] = useState(false);
   const [openUpdateAddress, setOpenUpdateAddress] = useState(false);
@@ -58,6 +56,7 @@ const Index = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!account) return; // Exit if no account is connected
       try {
         const items = await TOKEN_ICO();
         console.log(items);
@@ -67,9 +66,7 @@ const Index = () => {
       }
     };
 
-    if (account) {
-      fetchData();
-    }
+    fetchData();
   }, [account, TOKEN_ICO]);
 
   return (
@@ -96,7 +93,6 @@ const Index = () => {
           detail={detail}
           account={account}
           ERC20={ERC20}
-          TOKEN_ADDRESS={TOKEN_ADDRESS}
           setLoader={setLoader}
         />
       )}
@@ -108,8 +104,8 @@ const Index = () => {
           setLoader={setLoader}
         />
       )}
-      {transferCurrencyModal && ( // Corrected component name and state
-        <TransferCurrency // Corrected component name
+      {transferCurrencyModal && (
+        <TransferCurrency
           setTransferCurrency={setTransferCurrencyModal}
           TRANSFER_ETHER={TRANSFER_ETHER}
           detail={detail}
@@ -123,7 +119,7 @@ const Index = () => {
           detail={detail}
           currency={currency}
           setOpenDonate={setOpenDonate}
-          DONATE={DONATE} // Fixed typo from 'DONNATE' to 'DONATE'
+          DONATE={DONATE}
         />
       )}
       {openUpdatePrice && (
@@ -144,9 +140,8 @@ const Index = () => {
           setLoader={setLoader}
         />
       )}
-      {loader && <Loader />} {/* Corrected to use the Loader component */}
+      {loader && <Loader />} {/* Loader component */}
 
-      {/* Use imported components directly */}
       <Header
         account={account}
         CONNECT_WALLET={CONNECT_WALLET}
@@ -156,7 +151,6 @@ const Index = () => {
         shortenAddress={shortenAddress}
         detail={detail}
         currency={currency}
-        ownerModel={ownerModel}
       />
       <SideBar />
       <Hero
@@ -166,7 +160,7 @@ const Index = () => {
         setAccount={setAccount}
         setLoader={setLoader}
         detail={detail}
-        addTokenToMetaMask={addtokenToMetaMask} // Ensure consistency in naming
+        addTokenToMetaMask={addtokenToMetaMask}
       />
       <About />
       <Features />

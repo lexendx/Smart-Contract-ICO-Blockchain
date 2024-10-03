@@ -1,20 +1,27 @@
 import React from "react";
 
 const SideBar = () => {
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    // Add search functionality here if needed
+  };
+
   return (
     <aside className="slide-bar">
       <div className="close-mobile-menu">
-        <a href="/" className="tx-close"></a>
+        <button className="tx-close" onClick={() => {/* Logic to close the sidebar */}}>
+          &times; {/* or any close icon */}
+        </button>
       </div>
       <nav className="side-mobile-menu">
         <a href="/" className="header__logo mb-30">
-          <img src="assets/img/logo/logo.svg" alt="hello" srcSet=""></img>
+          <img src="assets/img/logo/logo.svg" alt="Logo" />
         </a>
         <div className="header-mobile-search">
-          <form action="#" role="search">
+          <form action="#" role="search" onSubmit={handleSearchSubmit}>
             <input type="text" placeholder="Search keywords" />
             <button type="submit">
-              <i className="ti-serach"></i>
+              <i className="ti-search"></i> {/* Fixed the typo here */}
             </button>
           </form>
         </div>
@@ -33,7 +40,7 @@ const SideBar = () => {
             </a>
           </li>
           <li>
-            <a href="3team" className="scrollspy-btn">
+            <a href="#team" className="scrollspy-btn"> {/* Fixed href here */}
               Team
             </a>
           </li>

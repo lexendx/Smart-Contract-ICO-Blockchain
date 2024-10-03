@@ -1,60 +1,45 @@
-import React ,{useState,useEffect}from "react";
+import React, { useState } from "react";
 
-const Donate = (
-               details,
-               currency,
-               setOpenDonate,
-              DONATE) => {
- 
-  const [donateFund,setDonateFund] = useState();
+const Donate = ({ details, currency, setOpenDonate, DONATE }) => {
+  const [donateFund, setDonateFund] = useState("");
 
-  
-
-  return(
+  return (
     <section className="new-margin ico-contact pos-rel">
-        <div className="container mb-20">
-          <div className="ico-contact__wrap">
-            <h2 className="title">Donate {currency}<strong onClick={()=>setDonateFund(false)}>X</strong></h2>
-            
-            <div>
-            <div className="row">
-              <div className="col-lg-12 mb-20">
-               
-              </div>
-              <div className="col-lg-12 mb-20">
-              <input
-                    type="text"
-                    placeholder="_reciver"
-                    onChange={(e)=>setDonateFund(e.target.value)}
-                  />
-              </div>
+      <div className="container mb-20">
+        <div className="ico-contact__wrap">
+          <h2 className="title">
+            Donate {currency}
+            <strong onClick={() => setOpenDonate(false)} style={{ cursor: 'pointer' }}> X </strong>
+          </h2>
 
-             
+          <div>
+            <div className="row">
+              <div className="col-lg-12 mb-20"></div>
+
+              <div className="col-lg-12 mb-20">
+                <input
+                  type="text"
+                  placeholder="_receiver"
+                  onChange={(e) => setDonateFund(e.target.value)}
+                  value={donateFund}
+                />
+              </div>
 
               <p>
-                <strong>Balance:</strong>{details?.maticBal} {currency}
+                <strong>Balance:</strong> {details?.maticBal} {currency}
               </p>
 
               <div className="ico-contact__btn text-center mt-10">
-                <button className="thm-btn" onClick={()=> DONATE(donateFund)}>
+                <button className="thm-btn" onClick={() => DONATE(donateFund)}>
                   Donate
                 </button>
               </div>
-
-              
-
-              
             </div>
           </div>
-
-           
-          </div>
-
-          
         </div>
-      
+      </div>
     </section>
-  )
+  );
 };
 
 export default Donate;
