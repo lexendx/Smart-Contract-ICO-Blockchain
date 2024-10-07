@@ -24,7 +24,7 @@ const Team = () => {
                 <img src="assets/img/team/img_01.png"/>
               </div>
               <div className="team__info text-center mb-30">
-                  <h3>Tony</h3>
+                  <h3>Saket Bhatnagar</h3>
                   <span>Developer</span>
               </div>
               <div className="team__social ul_li_center">
@@ -42,7 +42,7 @@ const Team = () => {
                 <img src="assets/img/team/img_02.png"/>
               </div>
               <div className="team__info text-center mb-30">
-                  <h3>John</h3>
+                  <h3>Saket Bhatnagar</h3>
                   <span>Developer</span>
               </div>
               <div className="team__social ul_li_center">
@@ -61,7 +61,7 @@ const Team = () => {
                 <img src="assets/img/team/img_03.png"/>
               </div>
               <div className="team__info text-center mb-30">
-                  <h3>Lena</h3>
+                  <h3>Saket Bhatnagar</h3>
                   <span>Developer</span>
               </div>
               <div className="team__social ul_li_center">
@@ -80,7 +80,7 @@ const Team = () => {
                 <img src="assets/img/team/img_04.png"/>
               </div>
               <div className="team__info text-center mb-30">
-                  <h3>Alex</h3>
+                  <h3>Saket Bhatnagar</h3>
                   <span>Developer</span>
               </div>
               <div className="team__social ul_li_center">
