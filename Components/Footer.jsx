@@ -23,7 +23,7 @@ const Footer = () => {
                 
                 <form action="">
                   <input type="text"
-                  placeholder="suyanshpandey@gmail.com" />
+                  placeholder="tiwaribaibhav2004@gamil.com" />
                   <button>
                     <IoIosSend/>
                   </button>
@@ -109,7 +109,7 @@ const Footer = () => {
         <div className="container">
           <div className="footer__copyright-inner ul_li_between">
            <div className="footer__copyright-text mt-15"> 
-                CopyRight @ 2024 @SuyanshPandey all rigth reserved
+                CopyRight @ 2024 @Baibhav Tiwari all rigth reserved
            </div>
 
            <ul className="footer__links ul_li_right mt-15">
